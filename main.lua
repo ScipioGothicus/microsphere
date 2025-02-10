@@ -1,14 +1,16 @@
 local Player = require("player")
 local player = Player.new()
 
-local Tilemap = require("tilemap")
-local tilemap = Tilemap.new()
+local Screen = require("screen")
+local screen = Screen.new()
+
+local screenBatch
 
 function love.load()
   local width, height = love.graphics.getDimensions()
   player.x = (width / 2.0) - 15.0
   player.y = (height / 2.0) - 15.0
-  tilemap:draw()
+  screenBatch = screen:load()
 end
 
 function love.update(dt)
@@ -30,6 +32,7 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.draw(screenBatch)
   love.graphics.circle("line", player.x, player.y, 10)
   love.graphics.print("pos\nx: " .. math.ceil(player.x) .. "\ny: " .. math.ceil(player.y), 50, 50)
 end
